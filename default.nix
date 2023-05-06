@@ -6,7 +6,7 @@
 # commands such as:
 #     nix-build -A mypackage
 
-{ pkgs ? import <nixpkgs> { } }:
+{ pkgs ? import <nixpkgs> { }, system ? builtins.currentSystem, mach-nix, mach-nixpkgs }:
 
 {
   # The `lib`, `modules`, and `overlay` names are special
@@ -16,4 +16,6 @@
 
   firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { });
   gitea-nyx = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/gitea-nyx { });
+  emacsPackages = import ./pkgs/emacs-packages { inherit pkgs; };
+  rec-mono-nyx = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/rec-mono-nyx { inherit mach-nix mach-nixpkgs system; });
 }
