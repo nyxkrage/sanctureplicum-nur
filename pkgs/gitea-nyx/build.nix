@@ -1,6 +1,6 @@
 { pkgs, giteaVersion, ... }:
 let
-  nodeNix = (import ./node.nix { inherit pkgs giteaVersion; });
+  nodeNix = (pkgs.callPackage ./node.nix { inherit giteaVersion; });
   nodeEnv = (pkgs.callPackage (nodeNix + "/default.nix") { });
 in
 pkgs.buildGoModule  rec {
