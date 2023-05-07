@@ -6,9 +6,14 @@
 # commands such as:
 #     nix-build -A mypackage
 
-{ pkgs ? import <nixpkgs> { }, system ? builtins.currentSystem, mach-nix, mach-nixpkgs }:
-
-{
+{ pkgs ? import <unstable> { }
+, system ? builtins.currentSystem
+, mach-nixpkgs ? import (builtins.fetchTarball "https://github.com/nixos/nixpkgs/archive/9fd0585f7dc9b85eb5d426396004cc649261e60d.tar.gz") {}
+, mach-nix ? import (builtins.fetchTarball "https://github.com/davhau/mach-nix/archive/6cd3929b1561c3eef68f5fc6a08b57cf95c41ec1.tar.gz") {
+    pkgs = mach-nixpkgs;
+    pypiData = builtins.fetchTarball "https://github.com/davhau/pypi-deps-db/archive/e9571cac25d2f509e44fec9dc94a3703a40126ff.tar.gz";
+  }
+}: {
   # The `lib`, `modules`, and `overlay` names are special
   lib = import ./lib { inherit pkgs; }; # functions
   modules = import ./modules; # NixOS modules

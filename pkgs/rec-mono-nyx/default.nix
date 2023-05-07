@@ -64,7 +64,7 @@
   };
 
   nativeBuildInputs = [
-    (mach-nix.lib."${system}".mkPython {
+    (mach-nix.mkPython {
       requirements = builtins.readFile "${src}/requirements.txt";
       _.pyyaml.doInstallCheck = false;
       ignoreDataOutdated = true;

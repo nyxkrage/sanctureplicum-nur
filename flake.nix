@@ -26,7 +26,8 @@
       packages = forAllSystems (system: import ./default.nix {
         pkgs = import nixpkgs { inherit system; };
         mach-nixpkgs = import mach-nixpkgs { inherit system; };
-        inherit mach-nix system;
+        mach-nix = mach-nix.lib.${system};
+        inherit system;
       });
     };
 }
