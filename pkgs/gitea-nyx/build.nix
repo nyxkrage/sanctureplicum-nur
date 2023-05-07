@@ -1,7 +1,7 @@
 { pkgs, giteaVersion, ... }:
 let
   nodeNix = (import ./node.nix { inherit pkgs giteaVersion; });
-  nodeEnv = (pkgs.callPackage ((builtins.trace nodeNix nodeNix) + "/default.nix") { });
+  nodeEnv = (pkgs.callPackage (nodeNix + "/default.nix") { });
 in
 pkgs.buildGoModule  rec {
   pname = "gitea-build";

@@ -35,7 +35,8 @@ jobs:
           - sanctureplicum
         nixPath:
           - nixpkgs=channel:nixos-unstable
-          - nixpkgs=channel:nixpkgs-unstable
+          # nixpkgs-unstable doesn't work
+          #- nixpkgs=channel:nixpkgs-unstable
           # FIXME: Gitea on stable is using different patches.
           # - nixpkgs=channel:nixos-22.11
     runs-on: ubuntu-latest
