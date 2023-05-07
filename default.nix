@@ -6,7 +6,7 @@
 # commands such as:
 #     nix-build -A mypackage
 
-{ pkgs ? import <unstable> { }
+{ pkgs ? import <nixpkgs> { }
 , system ? builtins.currentSystem
 , mach-nixpkgs ? import (builtins.fetchTarball "https://github.com/nixos/nixpkgs/archive/9fd0585f7dc9b85eb5d426396004cc649261e60d.tar.gz") {}
 , mach-nix ? import (builtins.fetchTarball "https://github.com/davhau/mach-nix/archive/6cd3929b1561c3eef68f5fc6a08b57cf95c41ec1.tar.gz") {
