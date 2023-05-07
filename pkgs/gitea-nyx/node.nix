@@ -1,4 +1,4 @@
-{ pkgs, giteaVersion, src, ... }:
+{ pkgs, giteaVersion, ... }:
 let
   escapeSlash = str: builtins.replaceStrings [ "/" ] [ "\\/"] str;
 in
@@ -6,7 +6,11 @@ pkgs.stdenv.mkDerivation rec {
   pname = "gitea-node-env";
   version = "${giteaVersion}-nyx";
 
-  inherit src;
+  src = pkgs.fetchgit  {
+    url = "https://gitea.pid1.sh/sanctureplicum/gitea.git";
+    rev = "refs/tags/${giteaVersion}";
+    hash = "sha256-KQEBq1BFQRLJW9fJq4W1sOsAqOCfNHKY/+cT8rkXxv4=";
+  };
 
   nativeBuildInputs = [ pkgs.node2nix ];
 
