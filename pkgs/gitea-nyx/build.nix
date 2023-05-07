@@ -6,7 +6,7 @@ let
     hash = "sha256-KQEBq1BFQRLJW9fJq4W1sOsAqOCfNHKY/+cT8rkXxv4=";
   };
   nodeNix = (import ./node.nix { inherit pkgs giteaVersion src; });
-  nodeEnv = (pkgs.callPackage (nodeNix + "/default.nix") { });
+  nodeEnv = (import (nodeNix + "/default.nix") { });
 in
 pkgs.buildGoModule  rec {
   pname = "gitea-build";
