@@ -20,7 +20,7 @@
   overlays = import ./overlays; # nixpkgs overlays
 
   firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { });
-  gitea-nyx = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/gitea-nyx { });
-  emacsPackages = import ./pkgs/emacs-packages { inherit pkgs; };
-  rec-mono-nyx = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/rec-mono-nyx { inherit mach-nix mach-nixpkgs system; });
+  gitea-nyx = import ./pkgs/gitea-nyx { inherit pkgs; };
+  emacsPackages = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/emacs-packages { });
+  rec-mono-nyx = import ./pkgs/rec-mono-nyx { inherit mach-nix mach-nixpkgs system pkgs; };
 }

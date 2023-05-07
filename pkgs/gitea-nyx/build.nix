@@ -1,6 +1,11 @@
 { pkgs, giteaVersion, ... }:
 let
-  nodeNix = (pkgs.callPackage ./node.nix { inherit giteaVersion; });
+  src = pkgs.fetchgit  {
+    url = "https://gitea.pid1.sh/sanctureplicum/gitea.git";
+    rev = "refs/tags/${giteaVersion}";
+    hash = "sha256-KQEBq1BFQRLJW9fJq4W1sOsAqOCfNHKY/+cT8rkXxv4=";
+  };
+  nodeNix = (import ./node.nix { inherit pkgs giteaVersion src; });
   nodeEnv = (pkgs.callPackage (nodeNix + "/default.nix") { });
 in
 pkgs.buildGoModule  rec {
@@ -8,11 +13,7 @@ pkgs.buildGoModule  rec {
   version = "${giteaVersion}-nyx";
   vendorSha256 = "sha256-gfHyssQrY5r3rQAzonM3Rv/BDIYGEY/PiOZEyoGGeiw=";
 
-  src = pkgs.fetchgit  {
-    url = "https://gitea.pid1.sh/sanctureplicum/gitea.git";
-    rev = "refs/tags/${giteaVersion}";
-    hash = "sha256-KQEBq1BFQRLJW9fJq4W1sOsAqOCfNHKY/+cT8rkXxv4=";
-  };
+  inherit src;
 
   nativeBuildInputs = [
     pkgs.gnumake
@@ -26,6 +27,7 @@ pkgs.buildGoModule  rec {
     ln -s ${nodeEnv.nodeDependencies}/lib/node_modules ./node_modules
     export PATH="${nodeEnv.nodeDependencies}/bin:$PATH"
     TAGS="bindata" VERSION="${version}" make frontend vendor generate release-sources 
+    rm -rf $HOME
   '';
 
   installPhase = ''
