@@ -1,3 +1,3 @@
 { pkgs, ... }: {
-  spectre-el = import ./spectre-el.nix;
+  spectre-el = pkgs.callPackage ./spectre-el.nix {};
 }

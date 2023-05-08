@@ -1,7 +1,4 @@
 { pkgs
-, mach-nixpkgs
-, mach-nix
-, system ? builtins.currentSystem
 , ...
 }: pkgs.stdenv.mkDerivation rec {
   pname = "rec-mono-nyx";
@@ -62,16 +59,23 @@
       "ss12"
     ];
   };
-
-  nativeBuildInputs = [
-    (mach-nix.mkPython {
-      requirements = builtins.readFile "${src}/requirements.txt";
-      _.pyyaml.doInstallCheck = false;
-      ignoreDataOutdated = true;
-      python = "python39";
-    })
-    mach-nixpkgs.python39Packages.pip
-    mach-nixpkgs.python39Packages.setuptools
+  
+  nativeBuildInputs = let
+    result = import ./py {inherit pkgs;};
+    python = pkgs.python39;
+    manylinux1 = pkgs.pythonManylinuxPackages.manylinux1;
+    overrides = result.overrides manylinux1 pkgs.autoPatchelfHook;
+    py = pkgs.python39.override { packageOverrides = overrides; };
+  in [
+    py.withPackages (ps: with ps; [ 
+      font-v
+      fonttools
+      opentype-feature-freezer
+      pyyaml
+      skia-pathops
+      ttfautohint-py
+      setupttools
+     ])
   ];
 
   outputs = [ "out" ];

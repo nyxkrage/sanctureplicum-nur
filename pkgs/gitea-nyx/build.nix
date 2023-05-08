@@ -1,12 +1,7 @@
 { pkgs, giteaVersion, ... }:
 let
-  src = pkgs.fetchgit  {
-    url = "https://gitea.pid1.sh/sanctureplicum/gitea.git";
-    rev = "refs/tags/${giteaVersion}";
-    hash = "sha256-KQEBq1BFQRLJW9fJq4W1sOsAqOCfNHKY/+cT8rkXxv4=";
-  };
-  nodeNix = (import ./node.nix { inherit pkgs giteaVersion src; });
-  nodeEnv = (pkgs.callPackage (nodeNix + "/default.nix") { });
+  src = pkgs.fetchgit  { url = "https://gitea.pid1.sh/sanctureplicum/gitea.git"; rev = "refs/tags/${giteaVersion}"; hash = "sha256-KQEBq1BFQRLJW9fJq4W1sOsAqOCfNHKY/+cT8rkXxv4="; };
+  nodeEnv = (pkgs.callPackage ./node { });
 in
 pkgs.buildGoModule  rec {
   pname = "gitea-build";
