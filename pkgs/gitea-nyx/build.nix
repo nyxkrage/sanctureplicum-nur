@@ -1,6 +1,5 @@
 { pkgs, giteaVersion, ... }:
 let
-  src = pkgs.fetchgit  { url = "https://gitea.pid1.sh/sanctureplicum/gitea.git"; rev = "refs/tags/${giteaVersion}"; hash = "sha256-KQEBq1BFQRLJW9fJq4W1sOsAqOCfNHKY/+cT8rkXxv4="; };
   nodeEnv = (pkgs.callPackage ./node { });
 in
 pkgs.buildGoModule  rec {
@@ -8,7 +7,11 @@ pkgs.buildGoModule  rec {
   version = "${giteaVersion}-nyx";
   vendorSha256 = "sha256-gfHyssQrY5r3rQAzonM3Rv/BDIYGEY/PiOZEyoGGeiw=";
 
-  inherit src;
+  src = pkgs.fetchgit {
+    url = "https://gitea.pid1.sh/sanctureplicum/gitea.git";
+    rev = "refs/tags/${giteaVersion}";
+    sha256 = "sha256-KQEBq1BFQRLJW9fJq4W1sOsAqOCfNHKY/+cT8rkXxv4=";
+  };
 
   nativeBuildInputs = [
     pkgs.gnumake

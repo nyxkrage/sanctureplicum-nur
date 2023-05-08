@@ -61,21 +61,21 @@
   };
   
   nativeBuildInputs = let
-    result = import ./py {inherit pkgs;};
     python = pkgs.python39;
+    result = import ./py {inherit pkgs python;};
     manylinux1 = pkgs.pythonManylinuxPackages.manylinux1;
     overrides = result.overrides manylinux1 pkgs.autoPatchelfHook;
     py = pkgs.python39.override { packageOverrides = overrides; };
   in [
-    py.withPackages (ps: with ps; [ 
+    (py.withPackages (ps: with ps; [ 
       font-v
       fonttools
       opentype-feature-freezer
       pyyaml
       skia-pathops
       ttfautohint-py
-      setupttools
-     ])
+      setuptools
+     ]))
   ];
 
   outputs = [ "out" ];

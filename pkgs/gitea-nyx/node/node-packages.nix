@@ -3410,11 +3410,7 @@ let
   args = {
     name = "gitea";
     packageName = "gitea";
-    src = fetchgit  {
-      url = "https://gitea.pid1.sh/sanctureplicum/gitea.git";
-      rev = "refs/tags/v1.19.3";
-      hash = "sha256-KQEBq1BFQRLJW9fJq4W1sOsAqOCfNHKY/+cT8rkXxv4=";
-    };
+    src = ./.;
     dependencies = [
       sources."@babel/parser-7.20.7"
       sources."@babel/runtime-7.20.7"
