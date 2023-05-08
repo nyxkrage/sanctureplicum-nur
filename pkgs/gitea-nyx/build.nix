@@ -10,7 +10,7 @@ pkgs.buildGoModule  rec {
   src = pkgs.fetchgit {
     url = "https://gitea.pid1.sh/sanctureplicum/gitea.git";
     rev = "refs/tags/${giteaVersion}";
-    sha256 = "sha256-KQEBq1BFQRLJW9fJq4W1sOsAqOCfNHKY/+cT8rkXxv4=";
+    sha256 = "sha256-jFNnHi1nja0DXq6nSgrBaQ3ezWKe55XyaHR77pGNM7U=";
   };
 
   nativeBuildInputs = [

@@ -10,11 +10,6 @@
 
 { pkgs ? import <nixpkgs> { }
 , system ? builtins.currentSystem
-, mach-nixpkgs ? import (builtins.fetchTarball { url = "https://github.com/nixos/nixpkgs/archive/9fd0585f7dc9b85eb5d426396004cc649261e60d.tar.gz"; sha256 = "sha256:0xl9mc0p63jr490hnrmlky7rm13f7zmp2hp1d9bjfyrbwafsg4dv"; }) {}
-, mach-nix ? import (builtins.fetchTarball { url = "https://github.com/davhau/mach-nix/archive/6cd3929b1561c3eef68f5fc6a08b57cf95c41ec1.tar.gz"; sha256 = "sha256:1a0gny4nlq39nyhgn94kl4rhmzax3h8xyh0jl7wrv0rzg38zf705"; }) {
-    pkgs = mach-nixpkgs;
-    pypiData = builtins.fetchTarball { url = "https://github.com/davhau/pypi-deps-db/archive/e9571cac25d2f509e44fec9dc94a3703a40126ff.tar.gz"; sha256 = "sha256:1rbb0yx5kjn0j6lk0ml163227swji8abvq0krynqyi759ixirxd5"; };
-  }
 }: {
   # The `lib`, `modules`, and `overlay` names are special
   lib = import ./lib { inherit pkgs; }; # functions
@@ -25,6 +20,6 @@
   gitea-nyx = import ./pkgs/gitea-nyx { inherit pkgs; };
   emacsPackages = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/emacs-packages { });
   pythonPackages = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/python-packages { });
-  rec-mono-nyx = pkgs.callPackage ./pkgs/rec-mono-nyx { inherit mach-nix mach-nixpkgs system; };
+  rec-mono-nyx = pkgs.callPackage ./pkgs/rec-mono-nyx { inherit system; };
   libspectre = pkgs.callPackage ./pkgs/libspectre { };
 }
