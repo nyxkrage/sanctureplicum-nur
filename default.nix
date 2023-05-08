@@ -24,6 +24,7 @@
   firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { });
   gitea-nyx = import ./pkgs/gitea-nyx { inherit pkgs; };
   emacsPackages = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/emacs-packages { });
+  pythonPackages = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/python-packages { });
   rec-mono-nyx = pkgs.callPackage ./pkgs/rec-mono-nyx { inherit mach-nix mach-nixpkgs system; };
   libspectre = pkgs.callPackage ./pkgs/libspectre { };
 }
