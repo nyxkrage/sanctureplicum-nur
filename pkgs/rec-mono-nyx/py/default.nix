@@ -2,7 +2,7 @@
 with builtins;
 with pkgs.lib;
 let
-  pypi_fetcher_src = builtins.fetchTarball {
+  pypi_fetcher_src = pkgs.fetchurl {
     name = "nix-pypi-fetcher-2";
     url = "https://github.com/DavHau/nix-pypi-fetcher-2/tarball/71a116a321a358fd0c30ab0e42cfc20eb47904a9";
     # Hash obtained using `nix-prefetch-url --unpack <url>`
