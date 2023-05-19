@@ -5,12 +5,12 @@ in
 pkgs.buildGoModule  rec {
   pname = "gitea-build";
   version = "${giteaVersion}-nyx";
-  vendorSha256 = "sha256-gfHyssQrY5r3rQAzonM3Rv/BDIYGEY/PiOZEyoGGeiw=";
+  vendorSha256 = "sha256-e/16nUf4L7O23VhHdrFzc7c+E52CF6PQ8QcsyQD7LhA=";
 
   src = pkgs.fetchgit {
     url = "https://gitea.pid1.sh/sanctureplicum/gitea.git";
     rev = "refs/tags/${giteaVersion}";
-    sha256 = "sha256-jFNnHi1nja0DXq6nSgrBaQ3ezWKe55XyaHR77pGNM7U=";
+    sha256 = "sha256-ovSDna7We1DTwkk8mD0Dhkfcyb6z2QnLDPRYkhHgiR0=";
   };
 
   nativeBuildInputs = [
