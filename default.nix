@@ -17,7 +17,7 @@
   overlays = import ./overlays; # nixpkgs overlays
 
   firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { });
-  gitea-nyx = import ./pkgs/gitea-nyx { inherit pkgs; };
+  gitea-nyx = pkgs.callPackage ./pkgs/gitea-nyx { };
   emacsPackages = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/emacs-packages { });
   pythonPackages = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/python-packages { });
   rec-mono-nyx = pkgs.callPackage ./pkgs/rec-mono-nyx { inherit system; };
