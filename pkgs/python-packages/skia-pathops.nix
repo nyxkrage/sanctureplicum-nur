@@ -23,7 +23,7 @@
   nativeBuildInputs = [ pkgs.python39.pkgs.cython pkgs.ninja pkgs.python39.pkgs.setuptools-scm ]
     ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [ pkgs.xcodebuild ];
 
-  buildInputs = pkgs.lib.optionals pkgs.stdenv.isDarwin [ pkgs.ApplicationServices pkgs.OpenGL ];
+  buildInputs = pkgs.lib.optionals pkgs.stdenv.isDarwin [ pkgs.darwin.apple_sdk.frameworks.ApplicationServices pkgs.darwin.apple_sdk.frameworks.OpenGL ];
 
   propagatedBuildInputs = [ pkgs.python39.pkgs.setuptools ];
 

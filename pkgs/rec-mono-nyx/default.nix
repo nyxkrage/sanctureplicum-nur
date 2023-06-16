@@ -72,7 +72,6 @@
       nurPs.ttfautohint-py
       ps.setuptools
      ]))
-    pkgs.ttfautohint
   ];
 
   outputs = [ "out" ];
